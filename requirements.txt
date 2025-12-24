@@ -1,0 +1,35 @@
+# Core deep learning framework
+torch>=1.9.0
+torchvision>=0.10.0
+
+# Image processing and computer vision
+opencv-python>=4.5.0
+scikit-image>=0.18.0
+
+# Scientific computing
+numpy>=1.19.0
+scipy>=1.5.0
+
+# Data handling and storage
+h5py>=3.0.0
+lmdb>=1.2.0
+
+# Configuration and utilities
+pyyaml>=5.4.0
+tqdm>=4.60.0
+
+# Parallel processing
+joblib>=1.0.0
+
+# For ISP pipeline (Cython support)
+Cython>=0.29.0
+
+# HTTP requests (for download utilities)
+requests>=2.25.0
+
+# CT image quality metrics
+pylinac>=3.0.0
+
+# Optional: For distributed training
+# tensorboard  # Uncomment if using TensorBoard logging
+# wandb  # Uncomment if using Weights & Biases logging

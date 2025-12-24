@@ -1,9 +1,9 @@
 # general settings
-name: CLIPDenoising_LDCTDenoising_GaussianSigma5
+name: CLIPDenoisingSimple_LDCTDenoising_GaussianSigma5
 model_type: ImageCleanModel
 scale: 1
 num_gpu: 1  # set num_gpu: 0 for cpu mode
-manual_seed: 500
+manual_seed: 100
 
 # dataset and data loader settings
 datasets:
@@ -13,7 +13,7 @@ datasets:
     sigma_type: constant
     sigma_range: 5
     test_patient: L506
-    in_ch: 1    ## RGB image
+    in_ch: 1    ## CT image (single channel)
 
     dataroot_gt: /home/gabriel/Research/dataset/mayo-challenge/npy_img
     geometric_augs: true
@@ -21,12 +21,12 @@ datasets:
     # data loader
     use_shuffle: true
     num_worker_per_gpu: 8
-    batch_size_per_gpu: 16
+    batch_size_per_gpu: 8
 
-    mini_batch_sizes: [16]
+    mini_batch_sizes: [8]
     iters: [40000]
-    gt_size: 128
-    gt_sizes: [128]
+    gt_size: 224
+    gt_sizes: [224]
     ### ------------------------------------------------------------
 
     dataset_enlarge_ratio: 1
@@ -35,23 +35,22 @@ datasets:
   val:
     name: ValSet
     type: Dataset_CTDenoising
-    in_ch: 1  ## RGB image
+    in_ch: 1  ## CT image (single channel)
     dataroot_gt: /home/gabriel/Research/dataset/mayo-challenge/npy_img
     test_patient: L506
 
 
 # network structures
 network_g:
-  type: CLIPDenoising
+  type: CLIPDenoisingSimple
+  clip_model_name: vit_base_patch16_clip_224.openai  # Use ResNet CLIP for flexible input sizes
   inp_channels: 1
   out_channels: 1
-  depth: 5
-  wf: 64
-  num_blocks: [3, 4, 6, 3]
-  bias: false
-  model_path: /home/gabriel/Research/CLIPDenoising/RN50.pt
-
-  aug_level: 0.025
+  num_upsample_blocks: 4  # 2^5 = 32x upsampling (ResNet has 32x downsampling)
+  decoder_base_channels: 64
+  refinement_base_channels: 64
+  num_refinement_layers: 5
+  freeze_clip: true
 
 # path
 path:

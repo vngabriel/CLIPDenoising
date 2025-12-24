@@ -61,7 +61,7 @@ def parse(opt_path, is_train=True):
         if (val is not None) and ('resume_state' in key
                                   or 'pretrain_network' in key):
             opt['path'][key] = osp.expanduser(val)
-    opt['path']['root'] = '/data0/cj/model_data/CLIP_Denoising' # osp.abspath(
+    opt["path"]["root"] = "/home/gabriel/Research/CLIPDenoising" # osp.abspath(
         # osp.join(__file__, osp.pardir, osp.pardir, osp.pardir))
     if is_train:
         experiments_root = osp.join(opt['path']['root'], 'experiments_refine',
