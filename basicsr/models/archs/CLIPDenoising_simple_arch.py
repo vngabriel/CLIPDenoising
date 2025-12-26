@@ -254,8 +254,8 @@ class CLIPDenoisingSimple(nn.Module):
 
         # Simple convolutional refinement
         # Input: [upsampled decoder features + original input]
-        # refinement_in_channels = decoder_base_channels + inp_channels
-        refinement_in_channels = decoder_base_channels
+        refinement_in_channels = decoder_base_channels + inp_channels
+        # refinement_in_channels = decoder_base_channels
 
         self.refinement = SimpleConvRefinement(
             in_channels=refinement_in_channels,
@@ -295,8 +295,8 @@ class CLIPDenoisingSimple(nn.Module):
         upsampled_features = self.decoder(clip_features)
 
         # Concatenate upsampled features with original input
-        # combined = torch.cat([upsampled_features, input_], dim=1)
-        combined = upsampled_features
+        combined = torch.cat([upsampled_features, input_], dim=1)
+        # combined = upsampled_features
 
         # Convolutional refinement to output clean image
         output = self.refinement(combined)

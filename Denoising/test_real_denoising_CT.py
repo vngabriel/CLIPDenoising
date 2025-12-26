@@ -128,7 +128,7 @@ model_restoration = CLIPDenoisingSimple(
     num_upsample_blocks=4,
 )
 checkpoint = torch.load(
-    "./experiments_refine/CLIPDenoisingSimple_LDCTDenoising_GaussianSigma5_archived_20251214_220357/models/net_g_latest.pth"
+    "./experiments_refine/CLIPDenoisingSimple_LDCTDenoising_GaussianSigma5/models/net_g_latest.pth"
 )
 # model_restoration = Unet(
 #     in_channels=1,
